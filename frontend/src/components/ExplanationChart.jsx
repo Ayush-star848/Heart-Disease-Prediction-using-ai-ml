@@ -1,3 +1,5 @@
+import FEATURE_LABELS from "../lib/featureLabels.js";
+
 export default function ExplanationChart({ explanation }) {
   if (!explanation || explanation.length === 0) {
     return null;
@@ -21,8 +23,8 @@ export default function ExplanationChart({ explanation }) {
           <div key={index} className="space-y-1">
             {/* Label row */}
             <div className="flex justify-between text-sm">
-              <span className="capitalize text-slate-700">
-                {item.feature.replace(/_/g, " ")}
+              <span className="text-slate-700">
+                {FEATURE_LABELS[item.feature] || item.feature}
               </span>
               <span
                 className={`font-medium ${

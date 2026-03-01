@@ -18,14 +18,16 @@ function App() {
           
           {/* Left: Patient Form (scrollable internally) */}
           <div className="bg-white rounded-xl shadow h-[calc(100vh-140px)] overflow-hidden">
-            <div className="h-full overflow-y-auto p-6 pr-4">
+            <div className="h-full overflow-y-auto p-6 pr-4 scroll-smooth">
               <PatientForm setResult={setResult} setLoading={setLoading} />
             </div>
           </div>
 
           {/* Right: Result Card (fixed height, no scroll) */}
-          <div className="bg-white rounded-xl shadow h-[calc(100vh-140px)] p-6">
-            <ResultCard result={result} loading={loading} />
+          <div className="bg-white rounded-xl shadow h-[calc(100vh-140px)] overflow-hidden">
+            <div className="h-full overflow-y-auto p-6 pr-4 scroll-smooth">
+              <ResultCard result={result} loading={loading} />
+            </div>
           </div>
 
         </div>
