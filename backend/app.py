@@ -14,7 +14,8 @@ model = joblib.load("model/heart_disease_model.pkl")
 scaler = joblib.load("model/scaler.pkl")
 
 # SHAP explainer (loaded once, reused)
-explainer = joblib.load("model/explainer.pkl")
+# explainer = joblib.load("model/explainer.pkl")
+explainer = None
 
 # ======================
 # Feature configuration
@@ -73,8 +74,12 @@ def predict():
         # ======================
         # SHAP Explainability
         # ======================
-        shap_values = explainer.shap_values(features_scaled)
+        global explainer
 
+        if explainer is None:
+            explainer = joblib.load("model/explainer.pkl")
+
+        shap_values = explainer.shap_values(features_scaled)
         # Handle different SHAP output formats safely
         if isinstance(shap_values, list):
             # Binary classification (older SHAP)
@@ -112,5 +117,8 @@ def predict():
         }), 500
 
 
+# if __name__ == "__main__":
+#     app.run(debug=True)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
