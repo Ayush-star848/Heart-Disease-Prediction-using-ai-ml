@@ -1,3 +1,5 @@
+import ExplanationChart from "./ExplanationChart";
+
 export default function ResultCard({ result, loading }) {
   // ⏳ Loading state
   if (loading) {
@@ -36,6 +38,7 @@ export default function ResultCard({ result, loading }) {
 
   const isHighRisk = result.prediction.toLowerCase().includes("high");
   const confidence = Number(result.confidence);
+  const explanation = result.explanation || [];
 
   return (
     <div className="bg-white rounded-xl shadow p-6 space-y-6">
@@ -87,10 +90,20 @@ export default function ResultCard({ result, loading }) {
           : "This prediction indicates a lower risk of heart disease. Maintain a healthy lifestyle and regular check-ups."}
       </div>
 
-      {/* XAI placeholder */}
-      <div className="border-t pt-4 text-sm text-slate-500">
-        Explainability insights will appear here.
-      </div>
+      {/* Explainable AI Section */}
+      {explanation.length > 0 && (
+        <div className="border-t pt-4">
+          <h3 className="text-sm font-semibold text-slate-700 mb-2">
+            Why this result?
+          </h3>
+
+          <p className="text-xs text-slate-500 mb-3">
+            These factors had the strongest influence on the prediction.
+          </p>
+
+          <ExplanationChart explanation={explanation} />
+        </div>
+      )}
     </div>
   );
 }
