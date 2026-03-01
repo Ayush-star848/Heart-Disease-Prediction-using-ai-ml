@@ -1,147 +1,142 @@
-❤️ Heart Disease Prediction Using AI
+# ❤️ Heart Disease Risk Prediction with Explainable AI
+
+A full-stack machine learning web application that predicts the **risk of heart disease** based on patient health parameters and explains **why** the prediction was made using **Explainable AI (SHAP)**.
+
+This project focuses on **model interpretability, user trust, and healthcare-friendly UX**, not just prediction accuracy.
+
+---
+
+## 🚀 Features
+
+- 🧠 **Machine Learning Prediction**
+  - XGBoost model trained on heart disease clinical data
+  - Predicts risk level with probability score
+
+- 🔍 **Explainable AI (XAI)**
+  - SHAP (SHapley Additive exPlanations) used to explain individual predictions
+  - Shows feature-wise contribution (what increased or reduced risk)
+
+- 🧑‍⚕️ **Healthcare-Friendly UI**
+  - Technical feature names converted into medical terms
+  - Clear risk indication (High / Low)
+  - Visual explanation with color-coded impact bars
+
+- 🌐 **Full-Stack Architecture**
+  - Backend: Flask + Python
+  - Frontend: React + Tailwind CSS
+  - REST API based communication
+
+---
+
+## 🧩 Tech Stack
+
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- Axios
+
+### Backend
+- Python
+- Flask
+- XGBoost
+- SHAP
+- NumPy, Scikit-learn
+
+---
+
+## 🏗️ Project Structure
+
+```text
+Heart-Disease-Prediction/
+├── backend/
+│   ├── model/
+│   │   ├── heart_disease_model.pkl
+│   │   ├── scaler.pkl
+│   │   └── explainer.pkl
+│   ├── app.py
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── public/
+│   │   └── heart.svg
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx
+│   │   │   ├── PatientForm.jsx
+│   │   │   ├── ResultCard.jsx
+│   │   │   └── ExplanationChart.jsx
+│   │   ├── lib/
+│   │   │   ├── api.js
+│   │   │   └── featureLabels.js
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
+│
+├── training/
+│   ├── heart_disease_dataset.csv
+│   └── train_model.py
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+## ⚙️ How It Works
+
+1. User enters patient health details (age, BP, cholesterol, ECG, etc.)
+2. Frontend sends data to Flask API
+3. Backend:
+   - Scales inputs
+   - Predicts heart disease risk using XGBoost
+   - Generates SHAP values for explainability
+4. Frontend displays:
+   - Risk result
+   - Probability score
+   - Feature-wise explanation (why this result)
+
+---
+
+## 📊 Explainable AI (SHAP)
 
-An AI-powered machine learning project that predicts the likelihood of heart disease in a patient based on medical attributes such as age, cholesterol level, blood pressure, heart rate, and more.
-The goal is to assist early diagnosis and support healthcare decision-making.
+This project uses **SHAP (SHapley Additive exPlanations)** to explain individual predictions.
 
-📌 Problem Statement
+- 🔴 **Red bars** → Increase heart disease risk
+- 🟢 **Green bars** → Reduce heart disease risk
+- Bar length represents **strength of influence**
 
-Heart disease is one of the leading causes of death worldwide. Early detection can significantly reduce risks and improve survival rates.
-This project uses machine learning algorithms to analyze patient data and predict whether a person is at risk of heart disease.
+This helps users and clinicians understand:
+> *Which health factors mattered most for this prediction*
 
-🚀 Features
+---
 
-Predicts presence or absence of heart disease
+## 🧪 Testing
 
-Uses real-world medical dataset
+### Backend
+- Tested using Postman / curl
+- Validated prediction and explanation output
 
-Multiple ML models implemented and compared
+### Frontend
+- UI tested with mock and real API responses
+- Scrollable dashboard layout tested for usability
 
-Data preprocessing and feature scaling
+---
 
-Model performance evaluation using accuracy, precision, recall, and confusion matrix
+## ⚠️ Disclaimer
 
-Easy-to-use and extensible codebase
+This application is **not a medical diagnostic tool**.  
+Predictions are based on a machine learning model and should **not replace professional medical advice**.
 
-🧠 Machine Learning Algorithms Used
+---
 
-Logistic Regression
+## 📌 Future Improvements
 
-Decision Tree Classifier
+- Probability calibration
+- Global model explainability dashboard
+- Feature-level tooltips with medical definitions
+- PDF report generation
+- Mobile-responsive optimization
 
-Random Forest Classifier
-
-Support Vector Machine (SVM)
-
-K-Nearest Neighbors (KNN)
-
-(Best-performing model is selected based on evaluation metrics)
-
-📊 Dataset
-
-Source: UCI Heart Disease Dataset
-
-Attributes include:
-
-Age
-
-Sex
-
-Chest pain type
-
-Resting blood pressure
-
-Cholesterol
-
-Fasting blood sugar
-
-Maximum heart rate achieved
-
-Exercise-induced angina
-
-ST depression
-
-Target (0 = No Heart Disease, 1 = Heart Disease)
-
-⚙️ Tech Stack
-
-Language: Python
-
-Libraries:
-
-NumPy
-
-Pandas
-
-Matplotlib / Seaborn
-
-Scikit-learn
-
-IDE: Jupyter Notebook / VS Code
-
-🛠️ Project Workflow
-
-Data Collection
-
-Data Cleaning & Preprocessing
-
-Exploratory Data Analysis (EDA)
-
-Feature Selection & Scaling
-
-Model Training
-
-Model Evaluation
-
-Prediction
-
-📈 Model Evaluation Metrics
-
-Accuracy Score
-
-Precision
-
-Recall
-
-F1 Score
-
-Confusion Matrix
-
-▶️ How to Run the Project
-
-Clone the repository
-
-git clone https://github.com/your-username/heart-disease-prediction.git
-
-Navigate to the project directory
-
-cd heart-disease-prediction
-
-Install dependencies
-
-pip install -r requirements.txt
-
-Run the notebook or script
-
-jupyter notebook
-📌 Results
-
-The model successfully predicts heart disease with high accuracy, demonstrating the potential of AI-based systems in medical diagnosis support.
-
-🔮 Future Improvements
-
-Deploy as a web app using Flask or Streamlit
-
-Add deep learning models
-
-Improve accuracy using hyperparameter tuning
-
-Integrate real-time patient input interface
-
-🤝 Contributing
-
-Contributions are welcome!
-Feel free to fork this repository and submit a pull request.
-
-📜 License
-
-This project is licensed under the MIT License.
+---
