@@ -3,6 +3,7 @@ from flask_cors import CORS
 import joblib
 import numpy as np
 import shap
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -10,8 +11,16 @@ CORS(app)
 # ======================
 # Load model & scaler
 # ======================
-model = joblib.load("model/heart_disease_model.pkl")
-scaler = joblib.load("model/scaler.pkl")
+
+# model = joblib.load("model/heart_disease_model.pkl")
+# scaler = joblib.load("model/scaler.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model_path = os.path.join(BASE_DIR, "model", "heart_disease_model.pkl")
+scaler_path = os.path.join(BASE_DIR, "model", "scaler.pkl")
+
+model = joblib.load(model_path)
+scaler = joblib.load(scaler_path)
 
 # SHAP explainer (loaded once, reused)
 # explainer = joblib.load("model/explainer.pkl")
@@ -77,7 +86,9 @@ def predict():
         global explainer
 
         if explainer is None:
-            explainer = joblib.load("model/explainer.pkl")
+            # explainer = joblib.load("model/explainer.pkl")
+            explainer_path = os.path.join(BASE_DIR, "model", "explainer.pkl")
+            explainer = joblib.load(explainer_path)
 
         shap_values = explainer.shap_values(features_scaled)
         # Handle different SHAP output formats safely
@@ -121,4 +132,5 @@ def predict():
 #     app.run(debug=True)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
